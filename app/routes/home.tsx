@@ -81,7 +81,7 @@ export default function Home() {
       setError(() => "")
       setLoading(() => true)
 
-      let q = query.term;
+      let q = `"${query.term.trim()}"`;
 
       for (const [key, value] of Object.entries(query)) {
         if (value.trim() === "") continue
@@ -112,7 +112,7 @@ export default function Home() {
         <h4 className="font-bold"> Search </h4>
         <div className="relative space-y-2 flex-wrap grid grid-cols-4 gap-x-4">
           <Input label="Term" value={query.term} onChange={v => updateQuery('term', v)} placeholder="function" />
-          <Input label="Repository" value={query.repo} onChange={v => updateQuery('repo', v)} placeholder="linux" />
+          <Input label="Repository" value={query.repo} onChange={v => updateQuery('repo', v)} placeholder="torvalds/linux" />
           <Input label="Label" value={query.label} onChange={v => updateQuery('label', v)} placeholder="progress" />
           <Input label="Username" value={query.user} onChange={v => updateQuery('user', v)} placeholder="andy-d-g" />
           <Input label="Organization" value={query.org} onChange={v => updateQuery('org', v)} placeholder="devlapp" />

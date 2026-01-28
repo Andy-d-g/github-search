@@ -69,15 +69,15 @@ export type Result = {
     incomplete_results: boolean;
 }
 
-const octokit = new Octokit()
-const token = import.meta.env.VITE_GITHUB_TOKEN;
+const octokit = new Octokit({
+    auth: import.meta.env.VITE_GITHUB_TOKEN
+});
 
 export default async function searchCode(params: Settings & { q: string }): Promise<Result> {
     const response = await octokit.request('GET /search/code', {
         headers: {
             'X-GitHub-Api-Version': '2022-11-28',
-            'accept': 'application/vnd.github+json',
-            'Authorization': `Bearer ${token}`
+            'accept': 'application/vnd.github+json'
         },
         ...params
     })
